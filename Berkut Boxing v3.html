@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>БЕРКУТ — Боксинг Клуб | Запоріжжя · EST. 2013</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#ECE6D8;
+    --paper2:#E2DAC8;
+    --ink:#17140F;
+    --ink-soft:#6a6256;
+    --red:#E1352A;
+    --red-deep:#b3261d;
+    --line:rgba(23,20,15,.18);
+    --line-strong:rgba(23,20,15,.55);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{background:var(--paper);color:var(--ink);font-family:'Barlow',system-ui,sans-serif;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  /* paper grain */
+  body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.4;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E")}
+  ::selection{background:var(--red);color:var(--paper)}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+
+  .display{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-.012em;line-height:.84}
+  .bebas{font-family:'Bebas Neue',sans-serif;text-transform:uppercase}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  .label{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.22em;font-size:.72rem;font-weight:500}
+  .red{color:var(--red)}.soft{color:var(--ink-soft)}
+  .wrap{width:min(1340px,92vw);margin-inline:auto;position:relative;z-index:2}
+  section{position:relative;z-index:2}
+  .logo-badge{border-radius:50%;object-fit:cover;background:#000;box-shadow:0 0 0 2px var(--red),0 0 0 5px var(--paper)}
+
+  /* ===== NAV ===== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+    padding:13px clamp(18px,5vw,46px);background:rgba(236,230,216,0);border-bottom:1.5px solid transparent;
+    transition:background .35s,border-color .35s,padding .35s,backdrop-filter .35s}
+  nav.scrolled{background:rgba(236,230,216,.9);backdrop-filter:blur(8px);border-bottom:1.5px solid var(--ink);padding-top:9px;padding-bottom:9px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{width:42px;height:42px}
+  .brand .txt b{font-family:'Anton',sans-serif;font-size:1.4rem;letter-spacing:.02em;display:block;line-height:.9;text-transform:uppercase}
+  .brand .txt small{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.24em;color:var(--ink-soft);display:block;margin-top:3px}
+  .nav-links{display:flex;gap:8px;align-items:center}
+  .nav-links a{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.74rem;font-weight:500;color:var(--ink);padding:8px 12px;position:relative}
+  .nav-links a span{color:var(--red);margin-right:5px}
+  .nav-links a:hover{background:var(--ink);color:var(--paper)}
+  .nav-links a:hover span{color:var(--red)}
+  .nav-cta{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-weight:600;font-size:.74rem;color:var(--paper);
+    background:var(--red);padding:11px 20px;transition:transform .2s,background .25s}
+  .nav-cta:hover{transform:translateY(-2px);background:var(--ink)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+  .burger span{width:25px;height:2px;background:var(--ink)}
+
+  /* ===== HERO ===== */
+  .hero{padding:130px 0 0;border-bottom:2px solid var(--ink)}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:0;align-items:stretch}
+  .hero-left{padding:14px clamp(18px,4vw,40px) 40px 0;display:flex;flex-direction:column;justify-content:flex-end;border-right:2px solid var(--ink)}
+  .hero-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:auto;padding-bottom:34px}
+  .hero-meta .label{color:var(--ink-soft)}
+  .hero h1{font-size:clamp(4.4rem,15.5vw,15rem);position:relative}
+  .hero h1 .ln{display:block;overflow:hidden}
+  .hero h1 .ln i{display:block;font-style:normal;transform:translateY(0);transition:transform 1s cubic-bezier(.16,1,.3,1) var(--d,0s)}
+  body.preload .hero h1 .ln i{transform:translateY(103%)}
+  .hero h1 .ln:nth-child(2) i{--d:.12s}
+  .hero h1 .ln em{font-style:normal;color:var(--red)}
+  .hero-sub{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;
+    opacity:1;transition:opacity .9s ease .5s}
+  body.preload .hero-sub{opacity:0}
+  .hero-sub .tg{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,2.6vw,2.1rem);letter-spacing:.06em}
+  .hero-sub .sep{width:8px;height:8px;background:var(--red);transform:rotate(45deg)}
+  .hero-actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;
+    opacity:1;transition:opacity .9s ease .65s}
+  body.preload .hero-actions{opacity:0}
+  .btn{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-weight:600;font-size:.86rem;padding:17px 34px;border:2px solid var(--ink);cursor:pointer;transition:transform .2s,background .25s,color .25s}
+  .btn-fill{background:var(--ink);color:var(--paper)}
+  .btn-fill:hover{background:var(--red);border-color:var(--red);transform:translateY(-3px)}
+  .btn-line{background:transparent;color:var(--ink)}
+  .btn-line:hover{background:var(--ink);color:var(--paper);transform:translateY(-3px)}
+  .hero-right{position:relative;min-height:440px;overflow:hidden}
+  .hero-right img{width:100%;height:100%;object-fit:cover;object-position:center 22%;filter:grayscale(1) contrast(1.08) brightness(.96);will-change:transform}
+  .hero-right::after{content:"";position:absolute;inset:0;background:var(--red);mix-blend-mode:multiply;opacity:.16}
+  .hero-emblem{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(110px,15vw,168px);height:clamp(110px,15vw,168px);z-index:3;
+    opacity:1;transition:opacity .9s ease .3s,transform .9s cubic-bezier(.16,1,.3,1) .3s}
+  body.preload .hero-emblem{opacity:0;transform:translate(-50%,-50%) scale(.86)}
+  .hero-tab{position:absolute;left:0;bottom:0;z-index:3;background:var(--red);color:var(--paper);padding:9px 16px}
+
+  /* marquee */
+  .marquee{background:var(--ink);color:var(--paper);overflow:hidden;border-bottom:2px solid var(--ink);padding:14px 0;white-space:nowrap}
+  .marquee .track{display:inline-block;animation:scroll 26s linear infinite}
+  .marquee .track span{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:1.5rem;letter-spacing:.04em;margin:0 26px}
+  .marquee .track .x{color:var(--red)}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ===== reveal ===== */
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+  .clip-title{clip-path:inset(0 100% 0 0);transition:clip-path 1s cubic-bezier(.16,1,.3,1)}
+  .clip-title.in{clip-path:inset(0 0 0 0)}
+
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:30px;margin-bottom:48px;border-bottom:2px solid var(--ink)}
+  .sec-head .idx{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.16em;color:var(--ink-soft)}
+  .sec-head .idx b{color:var(--red)}
+  .sec-head h2{font-size:clamp(2.6rem,7vw,6rem);margin-top:14px}
+
+  /* ===== ABOUT ===== */
+  .about{padding:clamp(80px,11vw,140px) 0}
+  .about-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(36px,5vw,72px);align-items:start}
+  .about-copy .lead{font-size:clamp(1.5rem,2.6vw,2.2rem);font-weight:500;line-height:1.28;text-wrap:pretty}
+  .about-copy .lead::first-letter{float:left;font-family:'Anton',sans-serif;font-size:4.2em;line-height:.7;padding:8px 16px 0 0;color:var(--red)}
+  .about-copy p{font-size:1.08rem;color:var(--ink-soft);margin-top:22px;max-width:48ch;text-wrap:pretty}
+  .about-side{display:flex;flex-direction:column;gap:0;border-top:2px solid var(--ink)}
+  .fact{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line)}
+  .fact .k{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.14em;color:var(--ink-soft);white-space:nowrap}
+  .fact .v{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.03em;text-align:right}
+  .fact .v em{font-style:normal;color:var(--red)}
+  .about-img{margin-top:26px;position:relative;aspect-ratio:16/10;overflow:hidden;border:2px solid var(--ink)}
+  .about-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.06)}
+  .about-img::after{content:"";position:absolute;inset:0;background:var(--red);mix-blend-mode:multiply;opacity:.15}
+
+  /* ===== DIRECTIONS (ledger) ===== */
+  .directions{padding:clamp(80px,11vw,140px) 0}
+  .dir-row{display:grid;grid-template-columns:90px 64px 1.1fr 1.5fr 50px;gap:24px;align-items:center;
+    padding:30px 14px;border-bottom:1.5px solid var(--ink);transition:background .35s,color .35s,padding .35s;cursor:default}
+  .dir-row:first-of-type{border-top:1.5px solid var(--ink)}
+  .dir-row .n{font-family:'IBM Plex Mono',monospace;font-size:.92rem;color:var(--red);letter-spacing:.1em}
+  .dir-row .ico{width:44px;height:44px;color:var(--ink);transition:color .35s,transform .4s}
+  .dir-row h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(1.5rem,2.6vw,2.2rem);line-height:.95}
+  .dir-row p{color:var(--ink-soft);font-size:1rem;transition:color .35s}
+  .dir-row .arr{justify-self:end;width:34px;height:34px;border:1.5px solid var(--line-strong);border-radius:50%;display:grid;place-items:center;transition:.35s}
+  .dir-row:hover{background:var(--ink);color:var(--paper);padding-left:26px}
+  .dir-row:hover .ico{color:var(--red);transform:scale(1.08)}
+  .dir-row:hover p{color:rgba(236,230,216,.7)}
+  .dir-row:hover .arr{background:var(--red);border-color:var(--red);color:var(--paper)}
+
+  /* ===== STATS ===== */
+  .stats{padding:clamp(70px,9vw,120px) 0;background:var(--ink);color:var(--paper);overflow:hidden}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat{padding:0 28px;border-left:1px solid rgba(236,230,216,.18)}
+  .stat:first-child{padding-left:0;border-left:0}
+  .stat .n{font-family:'Anton',sans-serif;font-size:clamp(3.6rem,7.5vw,6.6rem);line-height:.82}
+  .stat .n .u{color:var(--red)}
+  .stat .lab{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.14em;font-size:.74rem;color:rgba(236,230,216,.6);margin-top:16px}
+
+  /* ===== GALLERY (contact sheet) ===== */
+  .gallery{padding:clamp(80px,11vw,140px) 0}
+  .g-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:168px;gap:10px}
+  .g-item{position:relative;overflow:hidden;border:2px solid var(--ink)}
+  .g-item img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.06);transition:transform 1s cubic-bezier(.16,1,.3,1),filter .6s}
+  .g-item::before{content:"";position:absolute;inset:0;z-index:1;background:var(--red);mix-blend-mode:multiply;opacity:.18;transition:opacity .5s}
+  .g-item .cap{position:absolute;left:0;bottom:0;z-index:2;background:var(--ink);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.12em;padding:5px 9px;text-transform:uppercase}
+  .g-item:hover img{transform:scale(1.06);filter:grayscale(0) contrast(1.02)}
+  .g-item:hover::before{opacity:0}
+  .g-a{grid-column:span 3;grid-row:span 2}.g-b{grid-column:span 3}.g-c{grid-column:span 3}
+  .g-d{grid-column:span 2;grid-row:span 2}.g-e{grid-column:span 2;grid-row:span 2}.g-f{grid-column:span 2;grid-row:span 2}
+
+  /* ===== SCHEDULE ===== */
+  .schedule{padding:clamp(80px,11vw,140px) 0}
+  .sch-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(36px,5vw,72px);align-items:center}
+  .sch-copy h2{font-size:clamp(2.4rem,5vw,4rem)}
+  .sch-copy p{color:var(--ink-soft);font-size:1.08rem;margin-top:20px;max-width:40ch}
+  .open-pill{display:inline-flex;align-items:center;gap:11px;margin-top:24px;border:1.5px solid var(--ink);padding:9px 18px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem}
+  .open-pill .dot{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(225,53,42,.2)}
+  .ledger{border-top:2px solid var(--ink)}
+  .ledger .row{display:flex;justify-content:space-between;align-items:baseline;padding:24px 6px;border-bottom:1.5px solid var(--ink)}
+  .ledger .day{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:1.7rem}
+  .ledger .time{font-family:'IBM Plex Mono',monospace;font-size:1.15rem;font-weight:600}
+  .ledger .row.off .time{color:var(--ink-soft)}
+
+  /* ===== ENROLL ===== */
+  .enroll{background:var(--red);color:var(--paper);padding:clamp(90px,13vw,170px) 0;text-align:center;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);position:relative;overflow:hidden}
+  .enroll .big-ghost{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Anton',sans-serif;font-size:clamp(14rem,42vw,46rem);line-height:.8;color:rgba(23,20,15,.08);white-space:nowrap;z-index:0}
+  .enroll-inner{position:relative;z-index:2}
+  .enroll .label{color:rgba(236,230,216,.8)}
+  .enroll h2{font-size:clamp(3rem,11vw,9rem);margin:16px 0 6px}
+  .enroll h2 .o{color:transparent;-webkit-text-stroke:1.5px var(--paper)}
+  .enroll p{font-size:clamp(1.1rem,1.6vw,1.35rem);max-width:46ch;margin:18px auto 38px;color:rgba(236,230,216,.92)}
+  .btn-paper{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .btn-paper:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .btn-onred{background:transparent;color:var(--paper);border-color:var(--paper)}
+  .btn-onred:hover{background:var(--paper);color:var(--ink)}
+
+  /* ===== CONTACT ===== */
+  .contact{padding:clamp(80px,11vw,140px) 0}
+  .c-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(36px,5vw,68px)}
+  .c-item{display:grid;grid-template-columns:36px 1fr;gap:18px;padding:26px 0;border-bottom:1.5px solid var(--ink)}
+  .c-item:first-child{border-top:1.5px solid var(--ink)}
+  .c-item .ico{width:30px;height:30px;color:var(--red);margin-top:3px}
+  .c-item .k{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.16em;font-size:.7rem;color:var(--ink-soft)}
+  .c-item .v{font-size:1.18rem;margin-top:6px;line-height:1.5}
+  .c-item .v a:hover{color:var(--red)}
+  .c-item .v .ph{display:block}
+  .map{position:relative;min-height:420px;height:100%;border:2px solid var(--ink);overflow:hidden;filter:grayscale(.4) contrast(.96)}
+  .map iframe{width:100%;height:100%;border:0;display:block}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--ink);color:var(--paper);padding:54px 0 36px}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .foot .brand .txt b{color:var(--paper)}
+  .foot .brand .txt small{color:rgba(236,230,216,.6)}
+  .foot .soc{display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.1em;font-size:.78rem}
+  .foot .soc a{display:flex;align-items:center;gap:8px;color:rgba(236,230,216,.75)}
+  .foot .soc a:hover{color:var(--red)}
+  .foot-base{margin-top:34px;padding-top:22px;border-top:1px solid rgba(236,230,216,.2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:rgba(236,230,216,.5)}
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width:1024px){
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:40px 0}
+    .stat:nth-child(3){padding-left:0;border-left:0}
+    .g-grid{grid-template-columns:repeat(4,1fr);grid-auto-rows:148px}
+    .g-a{grid-column:span 2}.g-b{grid-column:span 2}.g-c{grid-column:span 2}
+    .g-d,.g-e,.g-f{grid-column:span 2;grid-row:span 1}
+  }
+  @media (max-width:820px){
+    .nav-links,.nav-cta{display:none}
+    .burger{display:flex}
+    .hero-grid{grid-template-columns:1fr}
+    .hero-left{border-right:0;border-bottom:2px solid var(--ink);padding-right:0}
+    .hero-right{min-height:340px}
+    .about-grid,.sch-grid,.c-grid{grid-template-columns:1fr}
+    .dir-row{grid-template-columns:54px 1fr 40px;gap:16px}
+    .dir-row .ico,.dir-row p{display:none}
+    .map{min-height:340px}
+  }
+  @media (max-width:560px){
+    .stats-grid{grid-template-columns:1fr;gap:30px 0}
+    .stat{padding-left:0;border-left:0}
+    .g-grid{grid-template-columns:repeat(2,1fr)}
+    .g-a,.g-b,.g-c,.g-d,.g-e,.g-f{grid-column:span 1;grid-row:span 1}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    .reveal,.clip-title{opacity:1!important;transform:none!important;clip-path:none!important}
+  }
+</style>
+</head>
+<body class="preload">
+
+<nav id="nav">
+  <a class="brand" href="#top">
+    <img class="logo-badge" src="assets/berkut-logo.png" alt="Беркут Боксинг" />
+    <span class="txt"><b>Беркут</b><small>BOXING CLUB · 2013</small></span>
+  </a>
+  <div class="nav-links">
+    <a href="#about"><span>01</span>Клуб</a>
+    <a href="#directions"><span>02</span>Напрямки</a>
+    <a href="#gallery"><span>03</span>Галерея</a>
+    <a href="#schedule"><span>04</span>Розклад</a>
+    <a href="#contact"><span>05</span>Контакти</a>
+  </div>
+  <a href="#enroll" class="nav-cta">Записатись →</a>
+  <div class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-meta">
+          <span class="label">Боксинг клуб</span>
+          <span class="label">Запоріжжя, UA</span>
+          <span class="label">EST. 2013</span>
+        </div>
+        <h1 class="display">
+          <span class="ln"><i>Беркут</i></span>
+          <span class="ln"><i><em>Боксинг</em></i></span>
+        </h1>
+        <div class="hero-sub">
+          <span class="tg">Сила</span><span class="sep"></span><span class="tg">Дисципліна</span><span class="sep"></span><span class="tg">Перемога</span>
+        </div>
+        <div class="hero-actions">
+          <a href="#enroll" class="btn btn-fill">Записатись →</a>
+          <a href="#about" class="btn btn-line">Про клуб</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img id="heroImg" src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1600" alt="Боксер" />
+        <img class="logo-badge hero-emblem" src="assets/berkut-logo.png" alt="Емблема Беркут" />
+        <span class="hero-tab label">Золотий орел</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee">
+  <div class="track">
+    <span>Беркут <em class="x">✦</em> Сила <em class="x">✦</em> Дисципліна <em class="x">✦</em> Перемога <em class="x">✦</em> Запоріжжя <em class="x">✦</em> Бокс <em class="x">✦</em> Беркут <em class="x">✦</em> Сила <em class="x">✦</em> Дисципліна <em class="x">✦</em> Перемога <em class="x">✦</em> Запоріжжя <em class="x">✦</em> Бокс <em class="x">✦</em> </span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="idx"><b>(01)</b> — ПРО КЛУБ</div>
+        <h2 class="display clip-title">Хижак не<br>просить дозволу</h2>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="about-copy">
+        <p class="lead reveal d1">«Беркут» — це золотий орел: точність, що б'є з висоти, і сила, яку не зупинити. Така і наша школа.</p>
+        <p class="reveal d2">Від 2013 року ми гартуємо характер у Запоріжжі — на вулиці Незалежної України, 65. Тут діти й дорослі вчаться не просто боксу, а дисципліні, яка лишається з людиною на все життя.</p>
+        <p class="reveal d2">Наш ринг приймав майстер-класи чемпіонів світу, а наші бійці виходили на національні змагання «Мужчини в рингу».</p>
+      </div>
+      <div class="about-side reveal d2">
+        <div class="fact"><span class="k">ЗАСНОВАНО</span><span class="v"><em>2013</em> · Запоріжжя</span></div>
+        <div class="fact"><span class="k">НАПРЯМКИ</span><span class="v">Бокс · Фітнес · Кардіо</span></div>
+        <div class="fact"><span class="k">ДЛЯ КОГО</span><span class="v">Діти та дорослі</span></div>
+        <div class="fact"><span class="k">ДОСВІД</span><span class="v">Чемпіони <em>світу</em></span></div>
+        <div class="about-img"><img src="https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=1200" alt="Тренер з атлетом" /></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTIONS -->
+<section class="directions" id="directions">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="idx"><b>(02)</b> — НАПРЯМКИ</div>
+        <h2 class="display clip-title">Обери свій бій</h2>
+      </div>
+      <span class="label soft">05 / напрямків</span>
+    </div>
+    <div class="dir-list">
+      <div class="dir-row reveal d1">
+        <span class="n">01</span>
+        <svg class="ico" viewBox="0 0 48 48" fill="none"><path d="M14 20c0-5 3-9 9-9s9 4 9 9v6c0 6-4 10-9 10s-9-4-9-10v-1" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M14 24h-3a3 3 0 0 0-3 3v2a3 3 0 0 0 3 3h3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M23 18v6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <h3>Бокс · дорослі</h3>
+        <p>Техніка, спаринги, постановка удару. Від новачка до бійця.</p>
+        <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+      <div class="dir-row reveal d1">
+        <span class="n">02</span>
+        <svg class="ico" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="14" r="5" stroke="currentColor" stroke-width="2.4"/><path d="M24 19v13M24 24l-8 4M24 24l8 4M24 32l-5 8M24 32l5 8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <h3>Бокс · діти</h3>
+        <p>Дисципліна та впевненість з ранніх років. Безпечно й чесно.</p>
+        <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+      <div class="dir-row reveal d2">
+        <span class="n">03</span>
+        <svg class="ico" viewBox="0 0 48 48" fill="none"><path d="M8 24h4M36 24h4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="12" y="18" width="6" height="12" rx="2" stroke="currentColor" stroke-width="2.4"/><rect x="30" y="18" width="6" height="12" rx="2" stroke="currentColor" stroke-width="2.4"/><path d="M18 24h12" stroke="currentColor" stroke-width="2.4"/></svg>
+        <h3>Фітнес</h3>
+        <p>Функціональні тренування на витривалість і тонус усього тіла.</p>
+        <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+      <div class="dir-row reveal d2">
+        <span class="n">04</span>
+        <svg class="ico" viewBox="0 0 48 48" fill="none"><path d="M6 24h5M37 24h5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="9" y="16" width="5" height="16" rx="2" stroke="currentColor" stroke-width="2.4"/><rect x="34" y="16" width="5" height="16" rx="2" stroke="currentColor" stroke-width="2.4"/><rect x="16" y="20" width="16" height="8" rx="2" stroke="currentColor" stroke-width="2.4"/></svg>
+        <h3>Бодібілдинг</h3>
+        <p>Силова робота й набір маси під контролем тренера.</p>
+        <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+      <div class="dir-row reveal d3">
+        <span class="n">05</span>
+        <svg class="ico" viewBox="0 0 48 48" fill="none"><path d="M24 38S9 29 9 19a8 8 0 0 1 15-3 8 8 0 0 1 15 3c0 10-15 19-15 19Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M14 23h6l3-5 3 9 2-4h6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Кардіо</h3>
+        <p>Спалюй, дихай, працюй. Інтенсив для серця й легень.</p>
+        <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat reveal d1"><div class="n"><span class="num" data-count="13">0</span><span class="u">+</span></div><div class="lab">Років у рингу</div></div>
+      <div class="stat reveal d2"><div class="n"><span class="num" data-count="500">0</span><span class="u">+</span></div><div class="lab">Атлетів</div></div>
+      <div class="stat reveal d3"><div class="n"><span class="num" data-count="5">0</span></div><div class="lab">Напрямків</div></div>
+      <div class="stat reveal d4"><div class="n"><span class="u">#</span><span class="num" data-count="1">0</span></div><div class="lab">У Запоріжжі</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="idx"><b>(03)</b> — ГАЛЕРЕЯ</div>
+        <h2 class="display clip-title">У русі. У бою.</h2>
+      </div>
+      <span class="label soft">контактний лист</span>
+    </div>
+    <div class="g-grid">
+      <div class="g-item g-a reveal d1"><img src="https://images.unsplash.com/photo-1517438476312-10d79c077509?w=1200" alt="Удар" /><span class="cap">001 · удар</span></div>
+      <div class="g-item g-b reveal d2"><img src="https://images.unsplash.com/photo-1564564295391-7f24f26f568b?w=1200" alt="Рукавиці" /><span class="cap">002 · рукавиці</span></div>
+      <div class="g-item g-c reveal d3"><img src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=1400" alt="Ринг" /><span class="cap">003 · ринг</span></div>
+      <div class="g-item g-d reveal d1"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200" alt="Юніори" /><span class="cap">004 · юніори</span></div>
+      <div class="g-item g-e reveal d2"><img src="https://images.unsplash.com/photo-1583473848882-f9a5bc7fd2ee?w=1200" alt="Тренер" /><span class="cap">005 · тренер</span></div>
+      <div class="g-item g-f reveal d3"><img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1600" alt="Боєць" /><span class="cap">006 · боєць</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule" id="schedule">
+  <div class="wrap sch-grid">
+    <div class="sch-copy">
+      <div class="idx" style="font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.16em;color:var(--ink-soft)"><b class="red">(04)</b> — РОЗКЛАД</div>
+      <h2 class="display clip-title" style="margin-top:14px">Зал відкрито</h2>
+      <p class="reveal d1">Заходь у будь-який зручний час. Перше пробне тренування — після короткого дзвінка з тренером.</p>
+      <span class="open-pill reveal d2"><span class="dot"></span>Зараз приймаємо набір</span>
+    </div>
+    <div class="ledger reveal d1">
+      <div class="row"><span class="day">Пн — Пт</span><span class="time">07:00 — 22:00</span></div>
+      <div class="row"><span class="day">Субота</span><span class="time">07:00 — 18:00</span></div>
+      <div class="row off"><span class="day">Неділя</span><span class="time">Вихідний</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ENROLL -->
+<section class="enroll" id="enroll">
+  <div class="big-ghost">2013</div>
+  <div class="enroll-inner wrap">
+    <span class="label">Запис у клуб</span>
+    <h2 class="display">Стань <span class="o">беркутом</span></h2>
+    <p>Один дзвінок відділяє тебе від першого тренування. Орел не чекає — він б'є.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:center">
+      <a href="tel:+380993400081" class="btn btn-paper">Записатись зараз →</a>
+      <a href="#contact" class="btn btn-onred">Контакти</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="idx"><b>(05)</b> — КОНТАКТИ</div>
+        <h2 class="display clip-title">Знайди нас</h2>
+      </div>
+    </div>
+    <div class="c-grid">
+      <div>
+        <div class="c-item reveal d1">
+          <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg>
+          <div><div class="k">Адреса</div><div class="v">Запоріжжя, вул. Незалежної України, 65</div></div>
+        </div>
+        <div class="c-item reveal d1">
+          <svg class="ico" viewBox="0 0 24 24" fill="none"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <div><div class="k">Телефони</div><div class="v">
+            <a class="ph" href="tel:+380993400081">(099) 340-0081</a>
+            <a class="ph" href="tel:+380953456132">(095) 345-6132</a>
+            <a class="ph" href="tel:+380979834093">(097) 983-4093</a>
+          </div></div>
+        </div>
+        <div class="c-item reveal d2">
+          <svg class="ico" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="m3.5 7 8.5 6 8.5-6" stroke="currentColor" stroke-width="1.8"/></svg>
+          <div><div class="k">Пошта</div><div class="v"><a href="/cdn-cgi/l/email-protection#0c65626a634c6e697e677978216e637465626b226f60796e"><span class="__cf_email__" data-cfemail="4f262129200f2d2a3d243a3b622d2037262128612c233a2d">[email&#160;protected]</span></a></div></div>
+        </div>
+        <div class="c-item reveal d2">
+          <svg class="ico" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>
+          <div><div class="k">Instagram</div><div class="v"><a href="https://instagram.com/berkut_boxing" target="_blank" rel="noopener">@berkut_boxing</a></div></div>
+        </div>
+      </div>
+      <div class="map reveal d1">
+        <iframe title="Беркут Боксинг на мапі" src="https://maps.google.com/maps?q=%D0%97%D0%B0%D0%BF%D0%BE%D1%80%D1%96%D0%B6%D0%B6%D1%8F%2C%20%D0%B2%D1%83%D0%BB.%20%D0%9D%D0%B5%D0%B7%D0%B0%D0%BB%D0%B5%D0%B6%D0%BD%D0%BE%D1%97%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B8%2C%2065&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="brand" href="#top">
+        <img class="logo-badge" src="assets/berkut-logo.png" alt="Беркут Боксинг" />
+        <span class="txt"><b style="font-family:'Anton',sans-serif;font-size:1.5rem;text-transform:uppercase">Беркут</b><small style="font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.22em;display:block;margin-top:3px">BOXING CLUB · ZAPORIZHZHIA</small></span>
+      </a>
+      <div class="soc">
+        <a href="https://instagram.com/berkut_boxing" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg>
+          @berkut_boxing
+        </a>
+        <a href="tel:+380993400081">(099) 340-0081</a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 БЕРКУТ БОКСИНГ — ЗАПОРІЖЖЯ, УКРАЇНА · EST. 2013</span>
+      <span>СИЛА · ДИСЦИПЛІНА · ПЕРЕМОГА</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.remove('preload')));
+
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>30);
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  const heroImg=document.getElementById('heroImg');
+  let ticking=false;
+  window.addEventListener('scroll',()=>{
+    if(ticking)return;ticking=true;
+    requestAnimationFrame(()=>{const y=window.scrollY;if(y<window.innerHeight){heroImg.style.transform='scale(1.05) translateY('+(y*0.05)+'px)';}ticking=false;});
+  },{passive:true});
+
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.16,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal,.clip-title').forEach(el=>io.observe(el));
+
+  const easeOut=t=>1-Math.pow(1-t,3);
+  function countUp(numSpan){
+    const target=+numSpan.dataset.count;const dur=1600,start=performance.now();
+    function step(now){const p=Math.min((now-start)/dur,1);numSpan.textContent=Math.round(easeOut(p)*target).toLocaleString('uk-UA');if(p<1)requestAnimationFrame(step);else numSpan.textContent=target.toLocaleString('uk-UA');}
+    requestAnimationFrame(step);
+  }
+  const cio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target);}});},{threshold:0.6});
+  document.querySelectorAll('.num[data-count]').forEach(n=>cio.observe(n));
+
+  const burger=document.getElementById('burger'),links=document.querySelector('.nav-links');
+  burger?.addEventListener('click',()=>{
+    const open=links.style.display==='flex';
+    if(open){links.style.display='';}
+    else{Object.assign(links.style,{display:'flex',position:'fixed',top:'58px',left:0,right:0,flexDirection:'column',gap:'2px',background:'var(--paper)',padding:'16px 22px',borderBottom:'2px solid var(--ink)',zIndex:99});}
+  });
+  document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{if(window.innerWidth<=820)links.style.display='';}));
+</script>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="48" height="48" fill="#ECE6D8"/>
+    <circle cx="24" cy="20" r="13" stroke="#17140F" stroke-width="2"/>
+    <path d="M24 13 L26.5 19 L24 26 L21.5 19 Z" fill="#E1352A"/>
+    <rect x="10" y="37" width="28" height="3" fill="#E1352A"/>
+  </svg>
+</template>
+</body>
+</html>
